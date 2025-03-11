@@ -23,6 +23,7 @@ console.log(y);
 let y = 10;
 ```
 a) A saída será undefined seguido de erro - correta
+
 **A variável x é declarada como undefined pois seu valor ainda não foi atribuído. A variável y não é acessável antes da linha "let y = 10", o que define um erro.**
 
 b) A saída será 5 seguido de 10
@@ -45,6 +46,7 @@ console.log(soma(2, 0));
 ```
 
 a) Substituir if (a || b === 0) por if (a === 0 || b === 0) - correta
+
 **Essa é a substituição correta, pois na verificação do enunciado, o operador "===" tem preferência ao operador "||", sendo assim, a leitura de "b===0" é realizada prioritariamente, o que sempre retornará o valor 0.**
 
 b) Substituir if (a || b === 0) por if (a === 0 && b === 0)
@@ -80,7 +82,8 @@ console.log(calcularPreco("eletrônico"));
 
 a) O código imprime 1000.
 
-b) O código imprime 200. - correto
+b) O código imprime 200. - correta
+
 **O código imprime 200 pois não existe um "break" no case "eletrônico", sendo assim, a leitura do switch é feita, porém a verificação se o tipo for eletronico é ignorada pela falta do break, o que faz a leitura continuar e parar no tipo vestuário.**
 
 c) O código imprime 50.
@@ -103,6 +106,7 @@ b) 6
 c) 18
 
 d) 24 - correta
+
 **A saída é 24. O primeiro método ".map(x => x*2)" multiplica todos os valores do array por 2.
 O segundo método ".filter(x => x>5) filtra todos os números maiores que 5.
 O terceiro método ".reduce((a, b) => a+b, 0)" soma todos os elementos restantes do array, começando com 0).**
@@ -120,6 +124,7 @@ a) ["banana", "maçã", "uva", "abacaxi", "manga", "laranja"]
 b) ["banana", "abacaxi", "manga"]
 
 c) ["banana", "abacaxi", "manga", "laranja"] - correta
+
 **O método ".splice" remove e altera o conteúdo de uma lista. O primeiro valor do método (1) indica qual posição iniciar a troca, o segundo valor (2) indica quantos elementos serão trocados. Os nomes "abacaxi" e "manga" serão os substitutos dos elementos retirados.**
 
 d) ["banana", "maçã", "uva", "abacaxi", "manga"]
@@ -130,7 +135,9 @@ I. A herança é utilizada para compartilhar métodos e propriedades entre class
 II. Em JavaScript, a herança é implementada através da palavra-chave `extends`.
 
 
-a) As duas afirmações são verdadeiras, e a segunda justifica a primeira.
+a) As duas afirmações são verdadeiras, e a segunda justifica a primeira. - correta
+
+**A palavra extends é a forma como a herança é implementada na linguagem, sendo assim, ela é a justificativa da primeira.**
 
 b) As duas afirmações são verdadeiras, mas a segunda não justifica a primeira.
 
@@ -172,7 +179,11 @@ III) O código não funciona corretamente, pois Funcionario não pode herdar de 
 
 Quais das seguintes afirmações são verdadeiras sobre o código acima?
 
-a) I e II são verdadeiras.
+a) I e II são verdadeiras. - correta
+
+**A classe funcionário herda de pessoa corretamente ao utilizar "extends", sendo assim pode acessar os atributos nome e idade.**
+
+**O método apresentar de funcionário sobrepõe o método apresentar de pessoa, pois os dois métodos têm o mesmo nome por isso a sobreposição. Além disso, o método apresentar da classe funcionário chama o método da classe pai usando o "super", com isso, a escrita no console do método apresentar da classe pessoa aparece primeiro.**
 
 b) I, II e III são verdadeiras.
 
@@ -189,7 +200,11 @@ ______
 
 a) A asserção é falsa e a razão é verdadeira.
 
-b) A asserção é verdadeira e a razão é falsa.
+b) A asserção é verdadeira e a razão é falsa. - correta
+
+**O conceito de polimorfismo permite que um mesmo método tenha saídas diferentes devido às classes, sendo assim o comportamento de um método muda dependendo do tipo de objeto.**
+
+**O método de sobrecarga não é suportado por JavaScript.**
 
 c) A asserção é verdadeira e a razão é verdadeira, mas a razão não explica a asserção.
 
@@ -210,6 +225,21 @@ function somaArray(numeros) {
 }
 console.log(somaArray([1, 2, 3, 4]));
 ```
+**O código correto é:**
+
+```javascript
+function somaArray(numeros) {
+
+    var soma = 0; //a variavel soma deve ser inicializada com 0
+
+    for (i = 0; i < numeros.length; i++) { //numeros.size não existe, o correto é numeros.length
+        soma += 2 * numeros[i]; //a variavel soma deve ser incrementada com o valor do array multiplicado por 2
+    }
+    return soma;
+}
+console.log(somaArray([1, 2, 3, 4]));
+```
+
 ______
 10) Crie um exemplo prático no qual você tenha duas classes:
 
@@ -217,3 +247,26 @@ ______
 - Uma classe `Livro` que herda de `Produto` e modifica o método `calcularDesconto()`, aplicando um desconto de 20% no preço dos livros.
 
 Explique como funciona a herança nesse contexto e como você implementaria a modificação do método na classe `Livro`.
+
+**Um exemplo prático para os descontos é:**
+```javascript
+class Produto { //classe pai, que contem os atributos e metodos comuns a todos os produtos
+    constructor(nome, preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+    calcularDesconto() { //método que calcula o desconto
+        return this.preco * 0.9;
+    }
+}
+
+class Livro extends Produto { //classe filha, que herda os atributos e métodos da classe pai
+    constructor(nome, preco) {
+        super(nome, preco); //chama o construtor da classe pai
+    }
+
+    calcularDesconto() { //sobrescreve o método calcularDesconto da classe pai
+        return this.preco * 0.8; //calcula o desconto de 20%
+    }
+}
+```
